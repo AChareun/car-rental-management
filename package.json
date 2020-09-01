@@ -2,9 +2,12 @@
   "name": "crud-cars",
   "version": "1.0.0",
   "description": "CRUD/ABM for cars",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js",
+    "dev": "nodemon -e 'js,njk,html' src/app.js",
+    "test": "jest --collect-coverage",
+    "test:dev": "jest --watch"
   },
   "repository": {
     "type": "git",
