@@ -1,1 +1,8 @@
+# Node Modules
 node_modules/
+
+# Env Variables
+.env
+
+# draw.io C4 model file
+doc/crud-cars-c4.drawio
