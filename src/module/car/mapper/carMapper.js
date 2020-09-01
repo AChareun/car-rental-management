@@ -1,7 +1,7 @@
 const Car = require('../entity/car');
 
 /**
- * @param {Object} formData 
+ * @param {Object} formData
  * @returns {Car}
  */
 function fromDataToEntity({
@@ -12,7 +12,7 @@ function fromDataToEntity({
   color,
   'has-air-conditioning': hasAirConditioning,
   passengers,
-  'is-automatic': isAutomatic
+  'is-automatic': isAutomatic,
 }) {
   return new Car({
     brand,
@@ -22,12 +22,12 @@ function fromDataToEntity({
     color,
     hasAirConditioning,
     passengers,
-    isAutomatic
-  })
+    isAutomatic,
+  });
 }
 
 /**
- * @param {Object} DbData 
+ * @param {Object} DbData
  * @returns {Car}
  */
 function fromDbToEntity({
@@ -38,7 +38,7 @@ function fromDbToEntity({
   color,
   has_air_conditioning: hasAirConditioning,
   passengers,
-  is_automatic: isAutomatic
+  is_automatic: isAutomatic,
 }) {
   return new Car({
     brand,
@@ -48,11 +48,11 @@ function fromDbToEntity({
     color,
     hasAirConditioning,
     passengers,
-    isAutomatic
-  })
+    isAutomatic,
+  });
 }
 
 module.exports = {
   fromDataToEntity,
-  fromDbToEntity
+  fromDbToEntity,
 };

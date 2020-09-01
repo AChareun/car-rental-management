@@ -7,7 +7,7 @@ module.exports = class Car {
     color,
     hasAirConditioning,
     passengers,
-    isAutomatic
+    isAutomatic,
   }) {
     this.brand = brand;
     this.model = model;
@@ -18,4 +18,4 @@ module.exports = class Car {
     this.passengers = passengers;
     this.isAutomatic = isAutomatic;
   }
-}
+};

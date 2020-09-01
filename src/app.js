@@ -10,13 +10,13 @@ app.use('/public', express.static('public'));
 
 nunjucks.configure('src/module', {
   autoescape: true,
-  express: app
+  express: app,
 });
 
 app.get('/', (req, res) => {
-  res.render('view/layout/index.html')
+  res.render('view/layout/index.html');
 });
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
-})
+});
