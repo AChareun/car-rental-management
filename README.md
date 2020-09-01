@@ -1,6 +1,6 @@
 # CRUD-Cars
 
-CRUD/ABM App for Cars. Done with Express, Nunjucks and SQLite.
+CRUD/ABM operations App for Cars. Done with Express, Nunjucks and SQLite.
 
 Project done in the context of the _[r/argentinaprograma](https://argentinaprograma.com/)_ web development course.
 
@@ -21,6 +21,6 @@ Project done in the context of the _[r/argentinaprograma](https://argentinaprogr
 
 ### C4 Model Diagrams
 
-[CRUD-Cars C4L1](doc/crud-carsc4l1.png)
-[CRUD-Cars C4L2](doc/crud-carsc4l2.png)
-[CRUD-Cars C4L3](doc/crud-carsc4l3.png)
+![CRUD-Cars C4L1](./doc/crud-cars-c4l1.png)
+![CRUD-Cars C4L2](./doc/crud-cars-c4l2.png)
+![CRUD-Cars C4L3](./doc/crud-cars-c4l3.png)
