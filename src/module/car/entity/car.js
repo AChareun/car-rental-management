@@ -1,5 +1,6 @@
 module.exports = class Car {
   constructor({
+    id,
     brand,
     model,
     year,
@@ -9,6 +10,7 @@ module.exports = class Car {
     passengers,
     isAutomatic,
   }) {
+    this.id = id;
     this.brand = brand;
     this.model = model;
     this.year = year;

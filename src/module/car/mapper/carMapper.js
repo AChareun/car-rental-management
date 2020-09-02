@@ -5,6 +5,7 @@ const Car = require('../entity/car');
  * @returns {Car}
  */
 function fromDataToEntity({
+  id,
   brand,
   model,
   year,
@@ -15,6 +16,7 @@ function fromDataToEntity({
   'is-automatic': isAutomatic,
 }) {
   return new Car({
+    id,
     brand,
     model,
     year,
@@ -31,6 +33,7 @@ function fromDataToEntity({
  * @returns {Car}
  */
 function fromDbToEntity({
+  id,
   brand,
   model,
   year,
@@ -41,6 +44,7 @@ function fromDbToEntity({
   is_automatic: isAutomatic,
 }) {
   return new Car({
+    id,
     brand,
     model,
     year,
