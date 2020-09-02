@@ -39,9 +39,10 @@ module.exports = class AbstractCarRepository {
   }
 
   /**
-   * @param {number} id
+   * @param {Car} car
+   * @returns {boolean} result of the delete operation
    */
-  async delete(id) {
+  async delete(car) {
     throw new MethodNotImplementedError();
   }
 };
