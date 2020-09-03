@@ -19,6 +19,13 @@ Project done in the context of the _[r/argentinaprograma](https://argentinaprogr
 
 ## About the App
 
+### To-Do
+
+- [ ] Implement sessions with express
+- [ ] More specific Errors
+- [ ] ORM and MySql for production
+- [ ] Views and scripts for the Frontend with Nunjucks and Bulma
+
 ### C4 Model Diagrams
 
 ![CRUD-Cars C4L1](./doc/crud-cars-c4l1.png)
