@@ -2,11 +2,13 @@ const AbstractController = require('../abstractController');
 const AbstractControllerError = require('../error/abstractControllerError');
 
 test('AbstractController can not be directly instantiated', () => {
+  let controllerInstance;
   try {
-    // eslint-disable-next-line no-new
-    new AbstractController();
+    controllerInstance = new AbstractController();
   } catch (error) {
     expect(error).toBeInstanceOf(AbstractControllerError);
+  } finally {
+    expect(controllerInstance).toBeUndefined();
   }
 });
 
