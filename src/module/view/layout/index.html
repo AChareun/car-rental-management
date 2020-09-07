@@ -13,7 +13,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"
     />
-    <link rel="stylesheet" href="/public/css/main.css" />
+    <link rel="stylesheet" href="/public/css/{{ styles }}" />
   </head>
   <body>
     <nav
@@ -53,7 +53,7 @@
       </div>
     </nav>
 
-    <section>
+    <section class="section">
       {% block body %} {% endblock %}
     </section>
     {% block footerScripts %} {% endblock %}

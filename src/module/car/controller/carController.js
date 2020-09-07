@@ -38,7 +38,10 @@ module.exports = class CarController extends AbstractController {
    */
   async list(req, res) {
     const carList = await this.carService.getAll();
-    res.render('car/view/car-list.html', { data: { carList } });
+    res.render('car/view/car-list.html', {
+      data: { carList },
+      styles: 'car-list.css',
+    });
   }
 
   /**
@@ -46,7 +49,9 @@ module.exports = class CarController extends AbstractController {
    * @param {Response} res
    */
   register(req, res) {
-    res.render('car/view/car-form.html');
+    res.render('car/view/car-form.html', {
+      styles: 'car-form.css',
+    });
   }
 
   /**
@@ -61,7 +66,10 @@ module.exports = class CarController extends AbstractController {
 
     try {
       const car = await this.carService.getById(id);
-      res.render('car/view/car-info.html', { data: { car } });
+      res.render('car/view/car-info.html', {
+        data: { car },
+        styles: 'car-info.css',
+      });
     } catch (error) {
       res.redirect('/car');
     }
