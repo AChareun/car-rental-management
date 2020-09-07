@@ -1,0 +1,28 @@
+{% extends "view/layout/index.html" %}
+{% block body %}
+  <div class="container main">
+    <h2 class="title is-2">List of available cars</h2>
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Year</th>
+          <th>KMs</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for car in data.carList %}
+          <tr>
+            <th>{{ car.id }}</th>
+            <td>{{ car.brand }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.year }}</td>
+            <td>{{ car.kms }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

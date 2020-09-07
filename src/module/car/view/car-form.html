@@ -1,0 +1,74 @@
+{% extends "view/layout/index.html" %}
+
+{% block body %}
+  <div class="container main">
+    <h2 class="title is-2">Add a new car</h2>
+    <form action="/car/save" method="post" enctype="application/x-www-form-urlencoded">
+      <div class="field">
+        <label class="label">Brand</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Car Brand" name="brand">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Model</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Car Model" name="model">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Year</label>
+        <div class="control">
+          <input class="input" type="number" placeholder="Model Year" name="year">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">KMs</label>
+        <div class="control">
+          <input class="input" type="number" placeholder="Car Kilometers" name="kms">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Color</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Car Color" name="color">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Has air conditioning?</label>
+        <div class="control">
+          <label class="checkbox">
+            <input type="checkbox" value="1" name="has-air-conditioning">
+            Yes
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" value="0" name="has-air-conditioning">
+            No
+          </label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Passengers</label>
+        <div class="control">
+          <input class="input" type="number" placeholder="Number of Passengers" name="passengers">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Transmission</label>
+        <div class="control">
+          <label class="checkbox">
+            <input type="checkbox" value="1" name="is-automatic">
+            Automatic
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" value="0" name="is-automatic">
+            Manual
+          </label>
+        </div>
+      </div>
+      <div class="control">
+        <button class="button is-success" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}
