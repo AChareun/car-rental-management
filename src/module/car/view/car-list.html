@@ -14,8 +14,8 @@
       </thead>
       <tbody>
         {% for car in data.carList %}
-          <tr>
-            <th>{{ car.id }}</th>
+        <tr>
+            <th><a href="/car/view/{{ car.id }}">{{ car.id }}</a></th>
             <td>{{ car.brand }}</td>
             <td>{{ car.model }}</td>
             <td>{{ car.year }}</td>
