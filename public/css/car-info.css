@@ -1,0 +1,19 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: auto;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: #acacac;
+}
+
+nav {
+  box-shadow: #000 0 0 3px 0;
+}
+
+table {
+  border-radius: 5px;
+  box-shadow: #000 1px 1px 3px 0;
+}

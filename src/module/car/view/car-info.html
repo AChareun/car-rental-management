@@ -1,5 +1,72 @@
 {% extends "view/layout/index.html" %}
 
 {% block body %}
-  This is the car-info View
+  <div class="container main">
+    <h2 class="title is-4">Car N° {{ data.car.id }}: {{ data.car.brand }} {{ data.car.model }}</h2>
+    <div class="field has-addons">
+      <p class="control">
+        <a class="button is-static is-success">
+          Year
+        </a>
+      </p>
+      <p class="control">
+        <input class="input" type="text" value="{{ data.car.year }}" readonly>
+      </p>
+    </div>
+
+    <div class="field has-addons">
+      <p class="control">
+        <a class="button is-static is-success">
+          KMs
+        </a>
+      </p>
+      <p class="control">
+        <input class="input" type="text" value="{{ data.car.kms }}" readonly>
+      </p>
+    </div>
+
+    <div class="field has-addons">
+      <p class="control">
+        <a class="button is-static is-success">
+          Color
+        </a>
+      </p>
+      <p class="control">
+        <input class="input" type="text" value="{{ data.car.color }}" readonly>
+      </p>
+    </div>
+
+    <div class="field has-addons">
+      <p class="control">
+        <a class="button is-static is-success">
+          Air Conditioning
+        </a>
+      </p>
+      <p class="control">
+        <input class="input" type="text" value="{{ "Yes" if data.car.hasAirConditioning else "No" }}" readonly>
+      </p>
+    </div>
+
+    <div class="field has-addons">
+      <p class="control">
+        <a class="button is-static is-success">
+          Passengers
+        </a>
+      </p>
+      <p class="control">
+        <input class="input" type="text" value="{{ data.car.passengers }}" readonly>
+      </p>
+    </div>
+
+    <div class="field has-addons">
+      <p class="control">
+        <a class="button is-static is-success">
+          Transmission
+        </a>
+      </p>
+      <p class="control">
+        <input class="input" type="text" value="{{ "Automatic" if data.car.hasAirConditioning else "Manual" }}" readonly>
+      </p>
+    </div>
+  </div>
 {% endblock %}
