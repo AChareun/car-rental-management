@@ -8,7 +8,7 @@ node_modules/
 doc/crud-cars-c4.drawio
 
 # database and session files
-data/*
+data/
 
 # test coverage data
-coverage/*
+coverage/
