@@ -9,3 +9,6 @@ doc/crud-cars-c4.drawio
 
 # database and session files
 data/*
+
+# test coverage data
+coverage/*
