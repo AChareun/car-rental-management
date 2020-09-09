@@ -18,6 +18,8 @@ nunjucks.configure('src/module', {
 
 const diContainer = configureDI();
 
+app.use(diContainer.get('Session'));
+
 carModuleInit(app, diContainer);
 
 /**

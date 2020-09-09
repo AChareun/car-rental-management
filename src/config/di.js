@@ -2,6 +2,7 @@ const {
   default: DIContainer, object, get, factory,
 } = require('rsdi');
 const Sqlite3Database = require('better-sqlite3');
+const session = require('express-session');
 const fs = require('fs');
 
 const { CarController, CarService, CarRepository } = require('../module/car/module');
@@ -18,12 +19,26 @@ function configureDatabaseAdapter() {
   return sqlite3Database;
 }
 
+function configureSession() {
+  const A_DAY_IN_SECONDS = 86400;
+
+  const configuredSession = session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: A_DAY_IN_SECONDS },
+  });
+
+  return configuredSession;
+}
+
 /**
  * @param {DIContainer} container
  */
 function addCommonDefinitions(container) {
   container.addDefinitions({
     DatabaseAdapter: factory(configureDatabaseAdapter),
+    Session: factory(configureSession),
   });
 }
 
