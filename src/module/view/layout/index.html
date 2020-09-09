@@ -43,6 +43,18 @@
       </div>
     </nav>
 
+    {% for error in errors %}
+    <div class="notification is-danger">
+      {{ error.message }}
+    </div>
+    {% endfor %}
+
+    {% for message in messages %}
+    <div class="notification is-success">
+      {{ message }}
+    </div>
+    {% endfor %}
+
     <section class="section">
       {% block body %} {% endblock %}
     </section>
