@@ -1,4 +1,7 @@
 const CarService = require('../carService');
+const CarIdNotDefinedError = require('../error/carIdNotDefinedError');
+const CarUndefinedError = require('../error/carUndefinedError');
+const NotInstanceOfCarError = require('../error/notInstanceOfCarError');
 const Car = require('../../entity/car');
 
 const repositoryMock = {
@@ -22,8 +25,12 @@ test('getById calls getById method from the repository with the id passed', () =
   expect(repositoryMock.getById).toHaveBeenCalledWith(1);
 });
 
-test('calling getById with no id throws an error', async () => {
-  await expect(testService.getById).rejects.toThrowError();
+test('calling getById with no id throws a specific error', async () => {
+  try {
+    await testService.getById();
+  } catch (error) {
+    expect(error).toBeInstanceOf(CarIdNotDefinedError);
+  }
 });
 
 test('save calls save method from the repository with car passed', () => {
@@ -33,8 +40,12 @@ test('save calls save method from the repository with car passed', () => {
   expect(repositoryMock.save).toHaveBeenCalledWith(testCar);
 });
 
-test('calling save with no car throws an error', async () => {
-  await expect(testService.save()).rejects.toThrowError();
+test('calling save with no car throws a specific error', async () => {
+  try {
+    await testService.save();
+  } catch (error) {
+    expect(error).toBeInstanceOf(CarUndefinedError);
+  }
 });
 
 test('delete calls delete method from the repository', () => {
@@ -44,6 +55,10 @@ test('delete calls delete method from the repository', () => {
   expect(repositoryMock.delete).toHaveBeenCalledWith(testCar);
 });
 
-test('calling delete with something that is not a Car instance throws an error', async () => {
-  await expect(testService.delete({})).rejects.toThrowError();
+test('calling delete with something that is not a Car instance throws a specific error', async () => {
+  try {
+    await testService.delete({});
+  } catch (error) {
+    expect(error).toBeInstanceOf(NotInstanceOfCarError);
+  }
 });
