@@ -4,6 +4,8 @@
  */
 
 const AbstractCarRepository = require('../abstractCarRepository');
+const CarNotFoundError = require('../error/carNotFoundError');
+const CarNotDefinedError = require('../error/carNotDefinedError');
 const { fromDbToEntity } = require('../../mapper/carMapper');
 
 module.exports = class CarRepository extends AbstractCarRepository {
@@ -59,7 +61,7 @@ module.exports = class CarRepository extends AbstractCarRepository {
     ).get(id);
 
     if (car === undefined) {
-      throw new Error();
+      throw new CarNotFoundError(`Car with ID ${id} was not found`);
     }
 
     return fromDbToEntity(car);
@@ -136,7 +138,7 @@ module.exports = class CarRepository extends AbstractCarRepository {
     const db = this.dbAdapter;
 
     if (!car || !car.id) {
-      throw new Error();
+      throw new CarNotDefinedError('Car to delete is not defined');
     }
 
     db.prepare(`DELETE FROM cars WHERE id = ${car.id}`).run();

@@ -1,6 +1,8 @@
 const Sqlite3Database = require('better-sqlite3');
 const fs = require('fs');
 const CarRepository = require('../carRepository');
+const CarNotFoundError = require('../../error/carNotFoundError');
+const CarNotDefinedError = require('../../error/carNotDefinedError');
 const Car = require('../../../entity/car');
 
 let mockDb;
@@ -56,10 +58,14 @@ test('Trying to update a non-existing Car throws an error', () => {
   expect(saveTestCar(testRepo, 1)).rejects.toThrowError();
 });
 
-test('Trying to get a non-existing Car throws an error', () => {
+test('Trying to get a non-existing Car throws a specific error', async () => {
   const testRepo = new CarRepository(mockDb);
 
-  expect(testRepo.getById(1)).rejects.toThrowError();
+  try {
+    await testRepo.getById(1);
+  } catch (error) {
+    expect(error).toBeInstanceOf(CarNotFoundError);
+  }
 });
 
 test('Method getById returns the correct Car', async () => {
@@ -83,10 +89,14 @@ test('Delete method deletes the correct Car', async () => {
   expect(testRepo.getById(2)).resolves.toEqual(testCar2);
 });
 
-test('Trying to delete a non-existing Car throws an errro', () => {
+test('Trying to delete a non-existing Car throws a specific errro', async () => {
   const testRepo = new CarRepository(mockDb);
 
-  expect(testRepo.delete({})).rejects.toThrowError();
+  try {
+    await testRepo.delete({});
+  } catch (error) {
+    expect(error).toBeInstanceOf(CarNotDefinedError);
+  }
 });
 
 test('Method getAll returns all Cars', async () => {
