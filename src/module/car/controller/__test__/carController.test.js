@@ -13,11 +13,12 @@ const testController = new CarController(serviceMock);
 test('List renders the car-list view', async () => {
   const renderMock = jest.fn();
 
-  await testController.list({}, { render: renderMock });
-
+  await testController.list({ session: { errors: [], messages: [] } }, { render: renderMock });
   expect(renderMock).toHaveBeenCalledTimes(1);
   expect(renderMock).toHaveBeenCalledWith('car/view/car-list.html', {
     data: { carList: [] },
+    errors: [],
+    messages: [],
     styles: 'car-list.css',
   });
 });
@@ -60,7 +61,10 @@ test('Save calls the service with the req body and redirects to /car', async () 
     'is-automatic': false,
   });
 
-  await testController.save({ body: bodyMock }, { redirect: redirectMock });
+  await testController.save({
+    body: bodyMock,
+    session: { errors: [], messages: [] },
+  }, { redirect: redirectMock });
 
   expect(serviceMock.save).toHaveBeenCalledTimes(1);
   expect(serviceMock.save).toHaveBeenCalledWith(bodyMock);
@@ -73,7 +77,10 @@ test('Delete calls the service with the req body id and redirects to /car', asyn
   serviceMock.getById.mockImplementationOnce(() => Promise.resolve(testCar));
   const redirectMock = jest.fn();
 
-  await testController.delete({ params: { id: 1 } }, { redirect: redirectMock });
+  await testController.delete({
+    params: { id: 1 },
+    session: { errors: [], messages: [] },
+  }, { redirect: redirectMock });
 
   expect(serviceMock.delete).toHaveBeenCalledTimes(1);
   expect(serviceMock.delete).toHaveBeenCalledWith(testCar);

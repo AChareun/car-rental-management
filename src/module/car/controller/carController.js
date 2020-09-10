@@ -37,11 +37,17 @@ module.exports = class CarController extends AbstractController {
    * @param {Response} res
    */
   async list(req, res) {
+    const { errors, messages } = req.session;
     const carList = await this.carService.getAll();
     res.render('car/view/car-list.html', {
       data: { carList },
+      errors,
+      messages,
       styles: 'car-list.css',
     });
+
+    req.session.errors = [];
+    req.session.messages = [];
   }
 
   /**
@@ -71,6 +77,7 @@ module.exports = class CarController extends AbstractController {
         styles: 'car-info.css',
       });
     } catch (error) {
+      req.session.errors = [...req.session.errors, error];
       res.redirect('/car');
     }
   }
@@ -82,10 +89,12 @@ module.exports = class CarController extends AbstractController {
   async save(req, res) {
     const car = fromDataToEntity(req.body);
     try {
-      // eslint-disable-next-line no-unused-vars
       const savedCar = this.carService.save(car);
+      req.session.messages = [...req.session.messages, `Car N°${savedCar.id} was registered successfully`];
+
       res.redirect('/car');
     } catch (error) {
+      req.session.errors = [...req.session.errors, error];
       res.redirect('/car');
     }
   }
@@ -99,8 +108,11 @@ module.exports = class CarController extends AbstractController {
     try {
       const carToDelete = await this.carService.getById(id);
       await this.carService.delete(carToDelete);
+
+      req.session.messages = [...req.session.messages, 'Requested car was successfully deleted'];
       res.redirect('/car');
     } catch (error) {
+      req.session.errors = [...req.session.errors, error];
       res.redirect('/car');
     }
   }
