@@ -29,7 +29,7 @@ module.exports = class CarController extends AbstractController {
     app.get(`${ROUTE}/register`, this.register.bind(this));
     app.get(`${ROUTE}/view/:id`, this.view.bind(this));
     app.post(`${ROUTE}/save`, this.save.bind(this));
-    app.get(`${ROUTE}/delete/:id`, this.delete.bind(this));
+    app.delete(`${ROUTE}/delete/:id`, this.delete.bind(this));
   }
 
   /**
@@ -77,7 +77,7 @@ module.exports = class CarController extends AbstractController {
         styles: 'car-info.css',
       });
     } catch (error) {
-      req.session.errors = [...req.session.errors, error];
+      req.session.errors = [error.message];
       res.redirect('/car');
     }
   }
@@ -89,12 +89,12 @@ module.exports = class CarController extends AbstractController {
   async save(req, res) {
     const car = fromDataToEntity(req.body);
     try {
-      const savedCar = this.carService.save(car);
-      req.session.messages = [...req.session.messages, `Car N°${savedCar.id} was registered successfully`];
+      const savedCar = await this.carService.save(car);
+      req.session.messages = [`Car with ID ${savedCar.id} was registered successfully`];
 
       res.redirect('/car');
     } catch (error) {
-      req.session.errors = [...req.session.errors, error];
+      req.session.errors = [error.message];
       res.redirect('/car');
     }
   }
@@ -109,10 +109,10 @@ module.exports = class CarController extends AbstractController {
       const carToDelete = await this.carService.getById(id);
       await this.carService.delete(carToDelete);
 
-      req.session.messages = [...req.session.messages, 'Requested car was successfully deleted'];
+      req.session.messages = [`Car with ID ${id} was successfully deleted`];
       res.redirect('/car');
     } catch (error) {
-      req.session.errors = [...req.session.errors, error];
+      req.session.errors = [error.message];
       res.redirect('/car');
     }
   }
