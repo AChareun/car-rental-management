@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
+    "db:sync": "node src/cli/init.db.js",
+    "dev": "npm run db:sync && nodemon src/app.js",
     "test": "jest --collect-coverage",
     "test:dev": "jest --watch"
   },
