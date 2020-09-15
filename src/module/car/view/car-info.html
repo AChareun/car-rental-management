@@ -68,5 +68,10 @@
         <input class="input" type="text" value="{{ "Automatic" if data.car.hasAirConditioning else "Manual" }}" readonly>
       </p>
     </div>
+
+    <div class="container">
+      <button class="button is-danger">DELETE</button>
+      <button class="button is-success">MODIFY</button>
+    </div>
   </div>
 {% endblock %}
