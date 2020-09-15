@@ -1,22 +1,20 @@
 const {
   default: DIContainer, object, get, factory,
 } = require('rsdi');
-const Sqlite3Database = require('better-sqlite3');
 const session = require('express-session');
-const fs = require('fs');
+const { Sequelize } = require('sequelize');
 
-const { CarController, CarService, CarRepository } = require('../module/car/module');
+const {
+  CarController, CarService, CarRepository, CarModel,
+} = require('../module/car/module');
 
-function configureDatabaseAdapter() {
-  const sqlite3Database = new Sqlite3Database(process.env.DB_PATH, {
-    // eslint-disable-next-line no-console
-    verbose: console.log,
+function configureSequelizeDatabase() {
+  const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: process.env.DB_PATH,
   });
 
-  const migration = fs.readFileSync('./src/config/setup.sql', 'utf8');
-  sqlite3Database.exec(migration);
-
-  return sqlite3Database;
+  return sequelize;
 }
 
 function configureSession() {
@@ -37,7 +35,7 @@ function configureSession() {
  */
 function addCommonDefinitions(container) {
   container.addDefinitions({
-    DatabaseAdapter: factory(configureDatabaseAdapter),
+    Sequelize: factory(configureSequelizeDatabase),
     Session: factory(configureSession),
   });
 }
@@ -45,9 +43,19 @@ function addCommonDefinitions(container) {
 /**
  * @param {DIContainer} container
  */
+function configureCarModel(container) {
+  CarModel.setup(container.get('Sequelize'));
+
+  return CarModel;
+}
+
+/**
+ * @param {DIContainer} container
+ */
 function addCarModuleDefinitions(container) {
   container.addDefinitions({
-    CarRepository: object(CarRepository).construct(get('DatabaseAdapter')),
+    CarModel: factory(configureCarModel),
+    CarRepository: object(CarRepository).construct(get('CarModel')),
     CarService: object(CarService).construct(get('CarRepository')),
     CarController: object(CarController).construct(get('CarService')),
   });
