@@ -9,6 +9,7 @@ module.exports = class Car {
     hasAirConditioning,
     passengers,
     isAutomatic,
+    unitaryValue,
   }) {
     this.id = id;
     this.brand = brand;
@@ -19,5 +20,6 @@ module.exports = class Car {
     this.hasAirConditioning = hasAirConditioning;
     this.passengers = passengers;
     this.isAutomatic = isAutomatic;
+    this.unitaryValue = unitaryValue;
   }
 };

@@ -1,3 +1,7 @@
+/**
+ * @typedef {import('../model/carModel')} CarModel
+ */
+
 const Car = require('../entity/car');
 
 /**
@@ -14,6 +18,7 @@ function fromDataToEntity({
   'has-air-conditioning': hasAirConditioning,
   passengers,
   'is-automatic': isAutomatic,
+  'unitary-value': unitaryValue,
 }) {
   return new Car({
     id,
@@ -25,38 +30,19 @@ function fromDataToEntity({
     hasAirConditioning,
     passengers,
     isAutomatic,
+    unitaryValue,
   });
 }
 
 /**
- * @param {Object} DbData
+ * @param {CarModel} carModel
  * @returns {Car}
  */
-function fromDbToEntity({
-  id,
-  brand,
-  model,
-  year,
-  kms,
-  color,
-  has_air_conditioning: hasAirConditioning,
-  passengers,
-  is_automatic: isAutomatic,
-}) {
-  return new Car({
-    id,
-    brand,
-    model,
-    year,
-    kms,
-    color,
-    hasAirConditioning,
-    passengers,
-    isAutomatic,
-  });
+function fromModelToEntity(carModel) {
+  return new Car(carModel.toJSON());
 }
 
 module.exports = {
   fromDataToEntity,
-  fromDbToEntity,
+  fromModelToEntity,
 };

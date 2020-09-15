@@ -9,5 +9,5 @@ test('CarModel setup creates Cars table on database', async () => {
 
   await sequelizeInstance.sync({ force: true });
 
-  expect(CarModel.findAll()).resolves.toEqual([]);
+  await expect(CarModel.findAll()).resolves.toEqual([]);
 });

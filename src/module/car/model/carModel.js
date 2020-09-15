@@ -50,11 +50,16 @@ module.exports = class CarModel extends Model {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },
+      unitaryValue: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
     {
       sequelize: sequelizeInstance,
       modelName: 'Car',
       timestamps: true,
+      paranoid: true,
     });
 
     return CarModel;
