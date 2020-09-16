@@ -3,6 +3,7 @@ const {
 } = require('rsdi');
 const session = require('express-session');
 const { Sequelize } = require('sequelize');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const {
   CarController, CarService, CarRepository, CarModel,
@@ -17,17 +18,31 @@ function configureSequelizeDatabase() {
   return sequelize;
 }
 
-function configureSession() {
-  const A_DAY_IN_SECONDS = 86400;
+function configureSequelizeStore() {
+  const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: process.env.SESSION_DB_PATH,
+  });
 
-  const configuredSession = session({
+  return new SequelizeStore({ db: sequelize });
+}
+
+/**
+ * @param {DIContainer} container
+ */
+function configureSession(container) {
+  const A_DAY_IN_SECONDS = 86400;
+  const sequelizeStore = container.get('SequelizeStore');
+
+  const sessionOptions = {
+    store: sequelizeStore,
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
     cookie: { maxAge: A_DAY_IN_SECONDS },
-  });
+  };
 
-  return configuredSession;
+  return session(sessionOptions);
 }
 
 /**
@@ -36,6 +51,7 @@ function configureSession() {
 function addCommonDefinitions(container) {
   container.addDefinitions({
     Sequelize: factory(configureSequelizeDatabase),
+    SequelizeStore: factory(configureSequelizeStore),
     Session: factory(configureSession),
   });
 }
